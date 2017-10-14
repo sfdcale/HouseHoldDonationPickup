@@ -25,7 +25,8 @@ trigger PickupTrigger on Pickup__c (after insert) {
       		sendTo.add(truckMap.get(pickUpTruckMap.get(pickUpObj.Id)).Driver_Email__c);
       		mail.setToAddresses(sendTo);
       		mail.setSubject('Found donation for pickup');
-      		String body = 'Here is the donation for pickUp: ' + String.valueOf(pickUpObj.Id);
+      		String body = 'Dear Truck driver (' + truckMap.get(pickUpTruckMap.get(pickUpObj.Id)).Driver_Email__c + ') \n';
+      		body =  body + 'Donation: ' + pickUpObj.Name +  ' is ready for pickUp: ' + String.valueOf(pickUpObj.Id);
       		mail.setPlainTextBody(body);
       		mails.add(mail);
 		}
