@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable" controller="TruckController">
+
+    <aura:attribute name="map" type="Object"/>
+    <aura:attribute name="trucks" type="Truck__c[]"/>
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> -->
+
+    <ltng:require styles="/resource/leaflet/leaflet.css"
+        scripts="/resource/leaflet/leaflet.js"
+        afterScriptsLoaded="{!c.jsLoaded}" />
+
+    <div id="myMap"></div>
+
+    <div id="trucks-list-id" style="height:50%; background-color:white;">
+    	<aura:iteration items="{!v.trucks}" var="truckObj">
+    		<li><a onclick="{!c.truckSelected}" data-lat="{!truckObj.Location__Latitude__s}" data-long="{!truckObj.Location__Longitude__s}">{!truckObj.Name}</a></li>
+    	</aura:iteration>
+    </div>
+
+</aura:component>
